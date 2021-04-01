@@ -1,0 +1,37 @@
+{
+    "success":{
+        "code":"0000",
+        "data":"",
+        "status":"success",
+        "display_message":"",
+        "error_message":""
+    },
+    "db_error":{
+        "code":"4100",
+        "data":"",
+        "status":"error",
+        "display_message":"Some error occurred",
+        "error_message":"Some error occurred"
+    },
+    "invalid_header":{
+        "code":"400",
+        "data":"",
+        "status":"error",
+        "display_message":"Invalid header",
+        "error_message":"Invalid header"
+    },
+    "none_parameter":{
+        "code":"4200",
+        "data":"",
+        "status":"error",
+        "display_message":"Please try again",
+        "error_message":"Missing parameter"
+    },
+    "empty_parameter":{
+        "code":"4201",
+        "data":"",
+        "status":"error",
+        "display_message":"Please try again",
+        "error_message":"Empty parameter"
+    }
+}
