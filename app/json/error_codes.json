@@ -20,6 +20,13 @@
         "display_message":"Invalid header",
         "error_message":"Invalid header"
     },
+    "insufficient_balance":{
+        "code":"4101",
+        "data":"",
+        "status":"error",
+        "display_message":"Insufficient balance in the account",
+        "error_message":"Insufficient balance in the account"
+    },
     "none_parameter":{
         "code":"4200",
         "data":"",
