@@ -15,7 +15,7 @@ class Users(Base):
     last_name = Column(String)
     date_of_birth = Column(Date)
     occupation = Column(String)
-    mobile_no = Column(Integer)
+    mobile_no = Column(String)
     created_date = Column(DateTime)
     password = Column(String)
 
@@ -28,7 +28,7 @@ class Branches(Base):
     branch_no = Column(Integer, primary_key=True, autoincrement="auto")
     branch_id = Column(String, unique=True)
     branch_name = Column(String)
-    branch_city = Column(String, index=True)
+    branch_city = Column(String)
     created_date = Column(DateTime)
 
     branches = relationship("Accounts", back_populates="account_branch")
@@ -37,14 +37,14 @@ class Accounts(Base):
     __tablename__ = "accounts"
 
     account_id = Column(Integer, primary_key=True, autoincrement="auto")
-    account_no = Column(String)
+    account_no = Column(String, unique=True)
     customer_id = Column(String, ForeignKey("users.customer_id"))
     branch_id = Column(String, ForeignKey("branches.branch_id"))
     opening_balance=Column(Integer)
     current_balance=Column(Integer)
     account_type=Column(String)
     account_status = Column(String)
-    account_creation_date = Column(DateTime, index=True)
+    account_created_date = Column(DateTime, index=True)
     
     user_account = relationship("Users", back_populates="accounts")
     account_branch = relationship("Branches", back_populates="branches")

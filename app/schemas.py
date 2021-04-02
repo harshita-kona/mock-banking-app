@@ -2,6 +2,23 @@ from typing import List, Optional
 from pydantic import BaseModel
 import datetime
 
+class TransactionBase(BaseModel):
+    account_no: str
+
+
+class TransactionCreate(TransactionBase):
+    medium_of_transaction: str
+    transaction_type: str
+    amount: int
+    transaction_date: datetime.datetime
+
+
+class Transaction(TransactionBase):
+    transaction_no: int
+    transaction_id: str
+
+    class Config:
+        orm_mode = True
 
 class UserBase(BaseModel):
     email_id: str
@@ -13,7 +30,7 @@ class UserCreate(UserBase):
     middle_name: str
     last_name: str
     occupation: str
-    mobile_no: int
+    mobile_no: str
     date_of_birth: datetime.date
     created_date: datetime.datetime
 
@@ -67,20 +84,4 @@ class Account(AccountBase):
         orm_mode = True
 
 
-class TransactionBase(BaseModel):
-    account_no: str
 
-
-class TransactionCreate(TransactionBase):
-    medium_of_transaction: str
-    transaction_type: str
-    amount: int
-    transaction_date: datetime.date
-
-
-class Transaction(TransactionBase):
-    transaction_no: int
-    transaction_id: str
-
-    class Config:
-        orm_mode = True
