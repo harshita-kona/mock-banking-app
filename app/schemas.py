@@ -5,6 +5,15 @@ import datetime
 class TransactionBase(BaseModel):
     account_no: str
 
+class LastnTransactions(BaseModel):
+    account_no: str
+    limit:int
+
+class TransactionsBetweenDates(BaseModel):
+    account_no: str
+    start_date:datetime.date
+    end_date:datetime.date
+
 
 class TransactionCreate(TransactionBase):
     medium_of_transaction: str

@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from uuid import uuid4
 from . import models, schemas
+import datetime
 
 
 def create_user(db: Session, user: schemas.UserCreate):
@@ -44,8 +45,17 @@ def add_user_transaction(db: Session, transaction: schemas.TransactionCreate):
         db.add(db_transaction)
         db.commit()
         db.refresh(db_transaction)
-
         return db_transaction
     else:
         return False
+
+def get_n_transactions(db: Session, transaction):
+    transactions=db.query(models.Transactions).filter(models.Transactions.account_no == transaction.account_no).order_by(models.Transactions.transaction_date.desc()).limit(transaction.limit).all()
+    return transactions
+
+def get_transactions_between_dates(db: Session, transaction):
+    transaction.start_date=datetime.datetime(transaction.start_date.year, transaction.start_date.month, transaction.start_date.day, 0, 0,0)
+    transaction.end_date=datetime.datetime(transaction.end_date.year, transaction.end_date.month, transaction.end_date.day, 23, 59,59)
+    transactions=db.query(models.Transactions).filter(models.Transactions.account_no == transaction.account_no).filter(models.Transactions.transaction_date >= transaction.start_date).filter(models.Transactions.transaction_date <= transaction.end_date).all()
+    return transactions
 
