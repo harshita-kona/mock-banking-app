@@ -1,7 +1,7 @@
 from fastapi import FastAPI,Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes.v0 import accounts
+from app.routes.v0 import accounts, transactions
 
 app = FastAPI()
 
@@ -18,4 +18,5 @@ app.add_middleware(
 )
 
 app.include_router(accounts.router,prefix="/api/v0/accounts")
+app.include_router(transactions.router,prefix="/api/v0/transactions")
 

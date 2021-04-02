@@ -25,10 +25,27 @@ def create_account(db: Session, account: schemas.AccountCreate):
     db.refresh(db_account)
     return db_account
 
+def update_current_balance(db: Session, transaction):
+    account=db.query(models.Accounts).filter(models.Accounts.account_no == transaction.account_no).first()
+    if transaction.transaction_type=="Withdrawal":
+        if account.current_balance<transaction.amount:
+            return False
+        else:
+            account.current_balance=account.current_balance-transaction.amount
+            db.commit()
+    else:
+        account.current_balance=account.current_balance+transaction.amount
+        db.commit()
+    return True
+
 def add_user_transaction(db: Session, transaction: schemas.TransactionCreate):
-    db_transaction = models.Transactions(transaction_no= str(uuid4()), account_no=transaction.account_no, medium_of_transaction= transaction.medium_of_transaction, transaction_type=transaction.transaction_type,amount= transaction.amount, transaction_date=transaction.transaction_date)
-    db.add(db_transaction)
-    db.commit()
-    db.refresh(db_transaction)
-    return db_transaction
+    if update_current_balance(db,transaction):
+        db_transaction = models.Transactions(transaction_no= str(uuid4()), account_no=transaction.account_no, medium_of_transaction= transaction.medium_of_transaction, transaction_type=transaction.transaction_type,amount= transaction.amount, transaction_date=transaction.transaction_date)
+        db.add(db_transaction)
+        db.commit()
+        db.refresh(db_transaction)
+
+        return db_transaction
+    else:
+        return False
 
