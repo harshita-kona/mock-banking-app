@@ -2,22 +2,10 @@ from typing import List, Optional
 from pydantic import BaseModel
 import datetime
 
-class TransactionBase(BaseModel):
-    transaction_date: datetime.date
-    amount: int
-
-class TransactionCreate(TransactionBase):
-    pass
-
-class Transaction(TransactionBase):
-    transaction_no: int
-    user_id: str
-
-    class Config:
-        orm_mode = True
 
 class UserBase(BaseModel):
     email_id: str
+
 
 class UserCreate(UserBase):
     password: str
@@ -29,9 +17,70 @@ class UserCreate(UserBase):
     date_of_birth: datetime.date
     created_date: datetime.datetime
 
+
 class User(UserBase):
     user_no: int
+    customer_id: str
     transactions: List[Transaction] = []
+
+    class Config:
+        orm_mode = True
+
+
+class BranchBase(BaseModel):
+    branch_name: str
+    branch_city: str
+    created_date: datetime.datetime
+
+
+class BranchCreate(BranchBase):
+    pass
+
+
+class Branch(BranchBase):
+    branch_no: int
+    branch_id: str
+    transactions: List[Transaction] = []
+
+    class Config:
+        orm_mode = True
+
+
+class AccountBase(BaseModel):
+    customer_id: str
+
+
+class AccountCreate(AccountBase):
+    branch_id: str
+    opening_balance: int
+    current_balance: int
+    account_type: str
+    account_status: str
+    account_created_date: datetime.datetime
+
+
+class Account(AccountBase):
+    account_no: int
+    transactions: List[Transaction] = []
+
+    class Config:
+        orm_mode = True
+
+
+class TransactionBase(BaseModel):
+    account_no: str
+
+
+class TransactionCreate(TransactionBase):
+    medium_of_transaction: str
+    transaction_type: str
+    amount: int
+    transaction_date: datetime.date
+
+
+class Transaction(TransactionBase):
+    transaction_no: int
+    transaction_id: str
 
     class Config:
         orm_mode = True
