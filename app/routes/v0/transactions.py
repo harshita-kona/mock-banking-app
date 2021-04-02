@@ -23,3 +23,16 @@ def account_signup(req:schemas.TransactionCreate ,db: Session = Depends(get_db))
         message=jsonable_encoder(message)
 
     return JSONResponse(message)
+
+@router.post('/lastntransactions/')
+def account_signup(req:schemas.LastnTransactions ,db: Session = Depends(get_db)):
+    message=database.get_n_transactions(db=db,transaction= req)
+    message=jsonable_encoder(message)
+    return JSONResponse(message)
+
+@router.post('/transactionsbydate/')
+def account_signup(req:schemas.TransactionsBetweenDates ,db: Session = Depends(get_db)):
+    message=database.get_transactions_between_dates(db=db,transaction= req)
+    message=jsonable_encoder(message)
+
+    return JSONResponse(message)
