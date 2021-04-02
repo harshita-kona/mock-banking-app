@@ -1,6 +1,7 @@
 from fastapi import FastAPI,Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from app.routes.v0 import accounts
 
 app = FastAPI()
 
@@ -15,3 +16,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(accounts.router,prefix="/api/v0/accounts")
+
