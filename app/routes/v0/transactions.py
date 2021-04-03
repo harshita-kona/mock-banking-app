@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 router = APIRouter()
 
 @router.post('/addtransaction/')
-def account_signup(req:schemas.TransactionCreate ,db: Session = Depends(get_db)):
+def account_signup(req:schemas.TransactionCreate ,db: Session = Depends(get_db), dependencies=Depends(check_apikey)):
     message=database.add_user_transaction(db=db,transaction= req)
     if not message:
         message=get_error_code("insufficient_balance")
@@ -25,13 +25,13 @@ def account_signup(req:schemas.TransactionCreate ,db: Session = Depends(get_db))
     return JSONResponse(message)
 
 @router.post('/lastntransactions/')
-def account_signup(req:schemas.LastnTransactions ,db: Session = Depends(get_db)):
+def account_signup(req:schemas.LastnTransactions ,db: Session = Depends(get_db), dependencies=Depends(check_apikey)):
     message=database.get_n_transactions(db=db,transaction= req)
     message=jsonable_encoder(message)
     return JSONResponse(message)
 
 @router.post('/transactionsbydate/')
-def account_signup(req:schemas.TransactionsBetweenDates ,db: Session = Depends(get_db)):
+def account_signup(req:schemas.TransactionsBetweenDates ,db: Session = Depends(get_db), dependencies=Depends(check_apikey)):
     message=database.get_transactions_between_dates(db=db,transaction= req)
     message=jsonable_encoder(message)
 
