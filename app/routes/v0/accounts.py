@@ -21,6 +21,11 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
+router = APIRouter()
+
+"""
+Function to create JWT access token
+"""
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
     if expires_delta:
@@ -31,8 +36,24 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
-router = APIRouter()
+"""
+API to sign up to the application
+"""
+@router.post('/signup/')
+def user_signup(req:schemas.UserCreate ,db: Session = Depends(get_db), dependencies=Depends(check_apikey)):
+    message=database.create_user(db=db,user= req)
+    if message.user_no:
+        message=get_error_code("success")
+        message=jsonable_encoder(message)
+    else:
+        message=get_error_code("db_error")
+        message=jsonable_encoder(message)
 
+    return JSONResponse(message)
+
+"""
+API to sign in to the application and authenticate the user
+"""
 @router.post('/signin/')
 def user_signin(req:schemas.UserLogin ,db: Session = Depends(get_db), dependencies=Depends(check_apikey)):
     user=database.get_authenticated_user(db,req)
@@ -49,18 +70,10 @@ def user_signin(req:schemas.UserLogin ,db: Session = Depends(get_db), dependenci
     message={"access_token": access_token, "token_type": "bearer", "customer_id":user.customer_id}
     return JSONResponse(message)
 
-@router.post('/signup/')
-def user_signup(req:schemas.UserCreate ,db: Session = Depends(get_db), dependencies=Depends(check_apikey)):
-    message=database.create_user(db=db,user= req)
-    if message.user_no:
-        message=get_error_code("success")
-        message=jsonable_encoder(message)
-    else:
-        message=get_error_code("db_error")
-        message=jsonable_encoder(message)
 
-    return JSONResponse(message)
-
+"""
+API to create a branch
+"""
 @router.post('/createbranch/')
 def create_branch(req:schemas.BranchCreate ,db: Session = Depends(get_db), dependencies=Depends(check_apikey)):
     message=database.create_branch(db=db,branch= req)
@@ -73,6 +86,9 @@ def create_branch(req:schemas.BranchCreate ,db: Session = Depends(get_db), depen
 
     return JSONResponse(message)
 
+"""
+API to create a bank account
+"""
 @router.post('/createaccount/')
 def create_user_account(req:schemas.AccountCreate,valid_user=Depends(get_current_user) ,db: Session = Depends(get_db), dependencies=Depends(check_apikey)):
     message=database.create_account(db=db,account= req)

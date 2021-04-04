@@ -59,6 +59,7 @@ class Transactions(Base):
     medium_of_transaction = Column(String)
     transaction_type = Column(String)
     amount = Column(Integer)
+    balance=Column(Integer)
     transaction_date = Column(DateTime, index=True)
 
     transaction_by = relationship("Accounts", back_populates="transactions")

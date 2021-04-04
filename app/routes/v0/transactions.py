@@ -9,6 +9,9 @@ from sqlalchemy.orm import Session
 
 router = APIRouter()
 
+"""
+API to add transaction of the user
+"""
 @router.post('/addtransaction/')
 def account_signup(req:schemas.TransactionCreate ,valid_user=Depends(get_current_user),db: Session = Depends(get_db), dependencies=Depends(check_apikey)):
     message=database.add_user_transaction(db=db,transaction= req)
@@ -24,12 +27,20 @@ def account_signup(req:schemas.TransactionCreate ,valid_user=Depends(get_current
 
     return JSONResponse(message)
 
+
+"""
+API to get last n transactions of the account
+"""
 @router.post('/lastntransactions/')
 def account_signup(req:schemas.LastnTransactions ,valid_user=Depends(get_current_user),db: Session = Depends(get_db), dependencies=Depends(check_apikey)):
     message=database.get_n_transactions(db=db,transaction= req)
     message=jsonable_encoder(message)
     return JSONResponse(message)
 
+
+"""
+API to get all the transactions done between the two dates
+"""
 @router.post('/transactionsbydate/')
 def account_signup(req:schemas.TransactionsBetweenDates ,valid_user=Depends(get_current_user),db: Session = Depends(get_db), dependencies=Depends(check_apikey)):
     message=database.get_transactions_between_dates(db=db,transaction= req)
