@@ -1,9 +1,18 @@
 import json
 import dns.resolver 
 import smtplib
+from passlib.context import CryptContext
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter, inch
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+def get_password_hash(password):
+    return pwd_context.hash(password)
+
+def verify_password(plain_password, hashed_password):
+    return pwd_context.verify(plain_password, hashed_password)
 
 def get_error_code(name):
     error_codes=json.load(open('app/json/error_codes.json', 'r'))

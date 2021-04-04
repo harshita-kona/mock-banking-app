@@ -13,11 +13,11 @@ def init_config():
     config_obj['api_key'] = getenv('API_KEY', 'NEEDKEYHERE')
 
     config_obj['postgres_conf'] = {
-        "pg_host": getenv('MONGO_HOST',''),
-        "pg_port":getenv('MONGO_PORT', 0),
-        "pg_user": getenv('MONGO_USER',''),
-        "pg_pw": getenv('MONGO_PASSWORD',''),
-        "pg_database": getenv('MONGO_DB',''),
+        "pg_host": getenv('PG_HOST',''),
+        "pg_port":getenv('PG_PORT', 0),
+        "pg_user": getenv('PG_USER',''),
+        "pg_pw": getenv('PG_PASSWORD',''),
+        "pg_database": getenv('PG_DB',''),
     }
 
     config_obj['email_conf'] = {
@@ -29,7 +29,9 @@ def init_config():
         "error_recp": getenv('ERROR_RECIPIENTS',''),
     }
 
-    config_obj['key']=getenv('KEY','')
+    config_obj['key']=getenv('SECRET_KEY','')
+    config_obj['algorithm']=getenv('ALGORITHM','')
+    config_obj['expire_token']=getenv('ACCESS_TOKEN_EXPIRE_MINUTES','')
 
     return config_obj
 

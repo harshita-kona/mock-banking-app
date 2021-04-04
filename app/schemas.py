@@ -4,6 +4,8 @@ import datetime
 
 class TransactionBase(BaseModel):
     account_no: str
+    access_token:str
+    token_type:str
 
 class LastnTransactions(BaseModel):
     account_no: str
@@ -29,6 +31,10 @@ class Transaction(TransactionBase):
     class Config:
         orm_mode = True
 
+class UserLogin(BaseModel):
+    email_id: str
+    password: str
+
 class UserBase(BaseModel):
     email_id: str
 
@@ -45,7 +51,6 @@ class UserCreate(UserBase):
 
 
 class User(UserBase):
-    user_no: int
     customer_id: str
     transactions: List[Transaction] = []
 
@@ -78,11 +83,15 @@ class AccountBase(BaseModel):
 
 class AccountCreate(AccountBase):
     branch_id: str
+    email_id: str
     opening_balance: int
     current_balance: int
     account_type: str
     account_status: str
     account_created_date: datetime.datetime
+    access_token:str
+    token_type:str
+
 
 
 class Account(AccountBase):
