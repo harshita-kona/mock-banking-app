@@ -67,7 +67,7 @@ def user_signin(req:schemas.UserLogin ,db: Session = Depends(get_db), dependenci
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token_expires = timedelta(minutes=int(ACCESS_TOKEN_EXPIRE_MINUTES))
     access_token = create_access_token(
         data={"sub": user.customer_id}, expires_delta=access_token_expires
     )
