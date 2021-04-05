@@ -41,3 +41,10 @@ def is_valid_email(test_address):
         return True
     else:
         return False
+    
+def contains_special_characters(name):
+    for i in name:
+        code=ord(i)
+        if code<65 or 90<code<97 or code>122:
+            return False
+    return True

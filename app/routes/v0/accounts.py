@@ -3,7 +3,7 @@ from fastapi import APIRouter, Request, Depends, FastAPI
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from app.src.dependencies import check_apikey, get_db, get_current_active_user, get_current_user
-from app.src.utils import get_error_code
+from app.src.utils import get_error_code, contains_special_characters
 from app import database, schemas
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
@@ -41,6 +41,10 @@ API to sign up to the application
 """
 @router.post('/signup/')
 def user_signup(req:schemas.UserCreate ,db: Session = Depends(get_db), dependencies=Depends(check_apikey)):
+    if contains_special_characters(req.first_name):
+        message=get_error_code("invalid_name")
+        message=jsonable_encoder(message)
+        return message
     message=database.create_user(db=db,user= req)
     if message.user_no:
         message=get_error_code("success")

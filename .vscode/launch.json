@@ -5,14 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Run App",
+            "name": "FastAPI",
             "type": "python",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+              },
             "request": "launch",
             "module": "uvicorn",
             "args": [
-                "main:app"
+                "main:app",
+                "--port",
+                "8000"
             ],
-            "jinja": true
+            "console": "integratedTerminal"
         }
     ]
 }

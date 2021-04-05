@@ -27,6 +27,13 @@
         "display_message":"Insufficient balance in the account",
         "error_message":"Insufficient balance in the account"
     },
+    "invalid_name":{
+        "code":"4102",
+        "data":"",
+        "status":"error",
+        "display_message":"Invalid name",
+        "error_message":"Invalid name"
+    },
     "none_parameter":{
         "code":"4200",
         "data":"",
