@@ -1,0 +1,352 @@
+{
+	"info": {
+		"_postman_id": "e61abb38-abcf-4b47-bc83-a265c8a90d95",
+		"name": "API Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User Sign up",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "api_key",
+						"value": "NEEDKEYHERE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email_id\": \"test@gmail.com\",\n    \"first_name\": \"H\",\n    \"middle_name\": \"\",\n    \"last_name\": \"K\",\n    \"date_of_birth\": \"2019-07-17\",\n    \"occupation\": \"Engineer\",\n    \"mobile_no\": 3240919303,\n    \"created_date\": \"2019-07-17T17:00:15+0530\",\n    \"password\":\"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v0/accounts/signup/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v0",
+						"accounts",
+						"signup",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Sign in",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "api_key",
+						"value": "NEEDKEYHERE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email_id\": \"test@gmail.com\",\n    \"password\":\"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v0/accounts/signin/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v0",
+						"accounts",
+						"signin",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create account",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "api_key",
+						"value": "NEEDKEYHERE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email_id\": \"test@gmail.com\",\n    \"branch_id\": \"14d25267-f0b7-40a4-af30-8fadc68e13cb\",\n    \"customer_id\": \"45970a75-4439-4df0-bd1b-30c3b480beef\",\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NTk3MGE3NS00NDM5LTRkZjAtYmQxYi0zMGMzYjQ4MGJlZWYiLCJleHAiOjE2MTc2NDE1NzJ9.Yx1yg1IGpWSGbbhPW0Y6JNiIIvHLT-F_BUEkcCXSyqI\",\n    \"token_type\": \"bearer\",\n    \"opening_balance\": \"100\",\n    \"current_balance\": \"100\",\n    \"account_type\": \"Savings\",\n    \"account_status\": \"ACTIVE\",\n    \"account_created_date\": \"2019-07-17T17:00:15+0530\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v0/accounts/createaccount/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v0",
+						"accounts",
+						"createaccount",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create branch",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "api_key",
+						"value": "NEEDKEYHERE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"branch_name\": \"Ramalingapuram\",\n    \"branch_city\": \"Nellore\",\n    \"created_date\": \"2019-07-17T17:00:15+0530\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v0/accounts/createbranch/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v0",
+						"accounts",
+						"createbranch",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Transaction",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "api_key",
+						"value": "NEEDKEYHERE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"account_no\": \"9d317a8f-fef5-49c6-ab67-55f77ddb7c6e\",\n    \"medium_of_transaction\": \"Cash\",\n    \"transaction_type\": \"Withdrawal\",\n    \"amount\": \"1000\",\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NTk3MGE3NS00NDM5LTRkZjAtYmQxYi0zMGMzYjQ4MGJlZWYiLCJleHAiOjE2MTc2NDE1NzJ9.Yx1yg1IGpWSGbbhPW0Y6JNiIIvHLT-F_BUEkcCXSyqI\",\n    \"token_type\": \"bearer\",\n    \"transaction_date\": \"2019-07-17T17:00:15+0530\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v0/transactions/addtransaction/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v0",
+						"transactions",
+						"addtransaction",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get last n transactions",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "api_key",
+						"value": "NEEDKEYHERE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"account_no\": \"3e8348ee-7ac6-4e2c-8542-fc4a1fe8f8a9\",\n    \"limit\": 4\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v0/transactions/lastntransactions/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v0",
+						"transactions",
+						"lastntransactions",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get transactions between dates",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "api_key",
+						"value": "NEEDKEYHERE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"account_no\": \"3e8348ee-7ac6-4e2c-8542-fc4a1fe8f8a9\",\n    \"start_date\": \"2019-07-17\",\n    \"end_date\":\"2019-07-17\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v0/transactions/transactionsbydate/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v0",
+						"transactions",
+						"transactionsbydate",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
