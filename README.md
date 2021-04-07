@@ -8,7 +8,7 @@
 
 ## Set up Project
 
-1. Clone the project.
+1. Clone the project and checkout "development" branch.
 2. Create virtual python environment.
-3. Install the project requirements using "pip install -r requirements.txt" and select the path in the Interpreter.
-4. In vscode, use Debug, to run the project.
+4. Install the project requirements using "pip install -r requirements.txt" and select the path in the Interpreter.
+5. In vscode, use Debug, to run the project.
