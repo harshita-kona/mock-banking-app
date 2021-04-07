@@ -12,3 +12,4 @@
 2. Create virtual python environment.
 4. Install the project requirements using "pip install -r requirements.txt" and select the path in the Interpreter.
 5. In vscode, use Debug, to run the project.
+6. Use app/db.sql to run sql script
